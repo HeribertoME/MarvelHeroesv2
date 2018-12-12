@@ -9,6 +9,7 @@ import com.hmelizarraraz.marvelheroesv2.utils.rx.RxSchedulers;
 
 import dagger.Module;
 import dagger.Provides;
+import io.reactivex.disposables.CompositeDisposable;
 
 @Module
 public class SplashModule {
@@ -16,7 +17,8 @@ public class SplashModule {
     @SplashScope
     @Provides
     SplashPresenter providePresenter(RxSchedulers schedulers, SplashModel model) {
-        return new SplashPresenter(model, schedulers);
+        CompositeDisposable compositeDisposable = new CompositeDisposable();
+        return new SplashPresenter(model, schedulers, compositeDisposable);
     }
 
     @SplashScope

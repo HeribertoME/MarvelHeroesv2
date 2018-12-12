@@ -5,6 +5,7 @@ import android.util.Log;
 import com.hmelizarraraz.marvelheroesv2.utils.UiUtils;
 import com.hmelizarraraz.marvelheroesv2.utils.rx.RxSchedulers;
 
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
 
@@ -12,23 +13,23 @@ public class SplashPresenter {
 
     private SplashModel model;
     private RxSchedulers rxSchedulers;
-//    private CompositeSubscription subscriptions;
+    private CompositeDisposable subscriptions;
 
     public SplashPresenter(SplashModel model,
-                           RxSchedulers schedulers
-//                           CompositeSubscription subscriptions
+                           RxSchedulers schedulers,
+                           CompositeDisposable subscriptions
     ) {
         this.model = model;
         this.rxSchedulers = schedulers;
-//        this.subscriptions = subscriptions;
+        this.subscriptions = subscriptions;
     }
 
     public void onCreate() {
-//        subscriptions.add(getHeroesList());
+        subscriptions.add(getHeroesList());
     }
 
     public void onDestroy() {
-//        subscriptions.clear();
+        subscriptions.clear();
     }
 
     private Disposable getHeroesList() {
